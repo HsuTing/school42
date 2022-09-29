@@ -1,0 +1,10 @@
+name: build
+
+on: [push]
+
+jobs:
+  build-docker:
+    uses: mikojs/actions/.github/workflows/build-docker.yml@main
+    with:
+      name: hsuting/school42
+      push: ${{ github.ref == 'refs/heads/main' }}
