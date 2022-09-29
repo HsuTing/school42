@@ -5,6 +5,11 @@ on: [push]
 jobs:
   build-docker:
     uses: mikojs/actions/.github/workflows/build-docker.yml@main
+    strategy:
+      matrix:
+        name: [school42, norminette]
     with:
-      name: hsuting/school42
+      name: hsuting/${{ matrix.name }}
+      context: ./docker-images/${{ matrix.name }}
+      file: ./docker-images/${{ matrix.name }}/Dockerfile
       push: ${{ github.ref == 'refs/heads/main' }}
