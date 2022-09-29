@@ -10,6 +10,6 @@ jobs:
         name: [school42, norminette]
     with:
       name: hsuting/${{ matrix.name }}
-      context: ./docker-images
+      context: ./docker-images/${{ matrix.name }}
       file: ./docker-images/${{ matrix.name }}/Dockerfile
       push: ${{ github.ref == 'refs/heads/main' }}
