@@ -7,7 +7,7 @@ jobs:
     uses: mikojs/actions/.github/workflows/build-docker.yml@main
     strategy:
       matrix:
-        name: [school42]
+        name: [school42, norminette]
     with:
       name: hsuting/${{ matrix.name }}
       context: ./docker-images
