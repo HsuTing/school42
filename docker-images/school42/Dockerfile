@@ -22,5 +22,5 @@ RUN jq '. + input' ./base-settings.json ./school42-settings.json > ./settings.js
 FROM base
 
 # config
-COPY --from=build /root/settings.json /root/.local/share/code-server/User/settings.json
+COPY --from=build /settings.json /root/.local/share/code-server/User/settings.json
 RUN rm /root/.local/share/code-server/User/school42-settings.json
