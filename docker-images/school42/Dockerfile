@@ -1,5 +1,8 @@
 FROM ghcr.io/hsuting/code-server:main as base
 
+# code-server
+RUN code-server --install-extension kube.42header
+
 # config
 COPY ./root /root
 
@@ -17,9 +20,6 @@ RUN jq '. + input' ./base-settings.json ./school42-settings.json > ./settings.js
 
 # main image
 FROM base
-
-# code-server
-RUN code-server --install-extension kube.42header
 
 # config
 COPY --from=build /root/settings.json /root/.local/share/code-server/User/settings.json
