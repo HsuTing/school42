@@ -22,5 +22,5 @@ FROM base
 RUN code-server --install-extension kube.42header
 
 # config
-COPY --from=build /root/.settings.json /root/.local/share/code-server/User/settings.json
+COPY --from=build /root/settings.json /root/.local/share/code-server/User/settings.json
 RUN rm /root/.local/share/code-server/User/school42-settings.json
