@@ -7,3 +7,4 @@ edition = "2021"
 strip = true
 
 [dependencies]
+clap = { version = "3.2.18", features = ["cargo"] }
