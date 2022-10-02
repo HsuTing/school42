@@ -1,11 +1,13 @@
 use clap::{ArgMatches, Command};
 
+use docker_images::utils::proxy_args;
+
 pub fn command() -> Command<'static> {
     Command::new("c")
-        .subcommand_required(true)
         .about("Some useful c commands")
+        .arg(proxy_args::set_proxy_args(true))
 }
 
 pub fn execute(matches: &ArgMatches) {
-    println!("{:?}", matches);
+    println!("{:?}", proxy_args::get_values_from_proxy_args(matches));
 }
