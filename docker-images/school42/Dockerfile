@@ -6,6 +6,9 @@ RUN code-server --install-extension kube.42header
 # config
 COPY ./root /root
 
+# bin
+COPY ./bin/school42 /bin/school42
+
 # build image
 FROM alpine as build
 
