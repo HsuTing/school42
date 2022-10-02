@@ -3,13 +3,19 @@ name: build
 on: [push]
 
 jobs:
+  build-rust:
+    uses: mikojs/actions/.github/workflows/build-rust.yml@main
+    with:
+      name: bin
+
   build-docker:
     uses: mikojs/actions/.github/workflows/build-docker.yml@main
+    needs: build-rust
     strategy:
       matrix:
         name: [school42, norminette]
     with:
+      cache: bin.tar
       name: hsuting/${{ matrix.name }}
       context: ./docker-images/${{ matrix.name }}
-      file: ./docker-images/${{ matrix.name }}/Dockerfile
       push: ${{ github.ref == 'refs/heads/main' }}
