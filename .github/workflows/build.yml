@@ -10,6 +10,7 @@ jobs:
 
   build-docker:
     uses: mikojs/actions/.github/workflows/build-docker.yml@main
+    needs: build-rust
     strategy:
       matrix:
         name: [school42, norminette]
