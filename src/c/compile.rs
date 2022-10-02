@@ -1,6 +1,6 @@
 use clap::{ArgMatches, Command};
 
-use docker_images::utils::proxy_args;
+use docker_images::utils::{proxy_args, docker, sub_process};
 
 pub fn command() -> Command<'static> {
     Command::new("compile")
@@ -9,5 +9,28 @@ pub fn command() -> Command<'static> {
 }
 
 pub fn execute(matches: &ArgMatches) {
-    println!("{:?}", proxy_args::get_values_from_proxy_args(matches));
+    docker::run(
+        [
+            vec![
+                "-it",
+                "--rm",
+                "ghcr.io/hsuting/norminette:main",
+                "norminette",
+            ],
+            proxy_args::get_values_from_proxy_args(matches),
+        ]
+            .concat(),
+    );
+    sub_process::exec(
+        "gcc",
+        [
+            vec![
+                "-Wall",
+                "-Wextra",
+                "-Werror",
+            ],
+            proxy_args::get_values_from_proxy_args(matches),
+        ]
+            .concat(),
+    );
 }
